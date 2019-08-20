@@ -1,0 +1,201 @@
+group_list = data['tickets']
+    #print(group_list)
+    result = []
+    for group in group_list:
+        result.append({
+            'asignado': group['assignee_id'],
+            'created_at': group['created_at'],
+            'descripcion': group['description'],
+            'id': group['id'],
+            'prioridad': group['priority'],
+            'status': group['status'],
+            'creo': group['requester_id'],
+            'via': group['via']['channel']
+        })
+
+        # New ticket info
+    subject = 'segundo tocket'
+    description = 'prueba '
+    requester = 387539451994
+
+
+
+    # Package the data in a dictionary matching the expected JSON
+    data = {'ticket':
+                {
+                'subject': subject, 
+                'description': description,
+                'requester_id': requester
+                }
+            }
+
+
+
+
+
+  data () {
+    return {
+      rows: 'prueba vue'
+    }
+  },
+
+
+  <template>
+  <div>
+    <div>
+      <ul id="example-1">
+      <li v-for="item in items" :key="item">
+    {{ item.message }}
+  </li>
+</ul>
+      <select name="" id="">
+      </select>
+      <input type="text">
+      <p>{{}}</p>
+    </div>
+    
+    <div>
+    <table id="firstTable">
+      <thead>
+        <tr>
+          <th>requester_id</th>
+          <th>interaction_id</th>
+          <th>description</th>
+          <th>priority</th>
+          <th>status</th>
+          <th>via</th>
+          <th>assignee_id</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="row in rows" :key="row">
+          <td>{{row.requester_id}}</td>
+          <td>{{row.interaction_id}}</td>
+          <td>{{row.description}}</td>
+          <td>{{row.priority}}</td>
+          <td>{{row.status}}</td>
+          <td>{{row.via}}</td>
+          <td>{{row.assignee_id}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</template>
+
+
+
+getTest(){
+      const path = 'http://localhost:5000/v1/test'
+      axios.get(path).then((respuesta) =>{
+        this.options = respuesta.data
+        console.log('algo esta pasando'+respuesta.data)
+      })
+      .catch((error) =>{
+          console.error(error);
+      })
+    }
+
+    ,
+
+    filter(){
+      const path = 'http://localhost:5000/v1/filter'
+      console.log(selected)
+      axios.get(path,{
+      params: {
+        filter :selected
+      }
+      }).then((respuesta) =>{
+        this.msg = respuesta.data
+        console.log('algo esta pasando'+respuesta.data)
+      })
+      .catch((error) =>{
+          console.error(error);
+      })
+    }
+
+
+    #db.users.drop()
+    #db2.interaction.drop()
+
+    
+    #result="hola"
+    #result = conexion.get_id_users(users)
+    #result = req.create_tikets(users)
+    #result = dummy.generator(users,0)
+
+    #id_users = conexion.get_id_users(users)
+    #result = v(users)
+    #data = {'tickets':result
+    #}
+    #print(data)
+
+
+    if request.args.get('id_user') != '' or request.args.get('id_user') != 'all':
+        if request.args.get('id_priority')!= '' or request.args.get('id_priority') != 'all':
+            if request.args.get('id_status') != '' or request.args.get('id_status') !='all':
+                
+        else:
+
+    else:
+
+    def getFilterPriority(interactions,users,id,priority):
+        print(id)
+        print(priority)
+        id_user = int(id)
+        result = []
+        for field in interactions.find({'assignee_id':id_user,'priority':priority}):
+                result.append({
+                'requester_id': getNameUsers(users,field['requester_id']),
+                'interaction_id': field['interaction_id'], 
+                'description': field['description'],
+                'priority': field['priority'],
+                'status':field['status'],
+                'via':field['via'],
+                'assignee_id': getNameUsers(users,field['assignee_id'])
+                #'created_at':field['created_at'],
+                #'updated_at':field['updated_at']
+        })
+        return result 
+
+
+
+    # Do the HTTP get request
+    response = requests.get(url1, auth=(user+"/token", token))
+
+    # Check for HTTP codes other than 200
+    if response.status_code != 200:
+        print('Status:', response.status_code, 'Problem with the request. Exiting.')
+        exit()
+
+    # Decode the JSON response into a dictionary and use the data
+    data = response.json()
+
+    #imprimir los primeros resultados de prueba
+    group_list = data['users']
+    result = []
+    for group in group_list:
+        tem = validation.separateNames(group['name'])
+        if conexion.verifyExistenceUser(users,group['id']):
+            if conexion.verifyChangesUser(users,group['id'],group['updated_at']):
+                conexion.updateUser(users,tem[0],tem[1],group['email'],group['id'],group['updated_at'])
+        else:
+            conexion.addUser(users,tem[0],tem[1],group['email'],group['id'],group['created_at'],group['updated_at'])        
+    return result
+
+
+
+    response = requests.get(url2, auth=(user+"/token", token))
+
+    data = response.json()
+
+    group_list = data['tickets']
+    result = []
+    for group in group_list:
+        if conexion.verifyExistenceInteraction(interactions,group['id']):
+            if conexion.verifyChangesInteraction(interactions,group['id'],group['updated_at']):
+                conexion.updateInteraction(interactions,group['id'],group['priority'],group['status'],group['assignee_id'],group['updated_at'])
+        else:
+            conexion.addTickets(interactions,group['requester_id'],group['id'],group['description'],group['priority'],group['status'],group['via']['channel'],group['assignee_id'],group['created_at'],group['updated_at'])
+    
+    return data
