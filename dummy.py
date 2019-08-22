@@ -10,7 +10,7 @@ subject = 'test'
 id_users = []
 
 #generate one ticket
-def generator(users,num):
+def generator(users):
     id_users = conexion.getIdUsers(users)
     data = {'ticket':
         {       
@@ -29,22 +29,25 @@ def generator(users,num):
     return data
 
 #generate some tickets
-def generateTickets(users):
-    id_users = conexion.get_id_users(users)
+def generateTickets(users,num2):
+    num = int(num2)
+    id_users = conexion.getIdUsers(users)
     result = []
-    for i in range(3):
-            result.append({
-            'subject': subject, 
-            'description': description,
-            'requester_id': random.choice(id_users),
-            'priority': random.choice(priority),
-            'status': random.choice(status),
-            'type': random.choice(type_),
-            'assignee_id': random.choice(id_users),
-            'via':{
-                'channel': random.choice(via)
-            }
-            
-            })
+    
+    for i in range(num):
+        result.append({
+        'subject': subject, 
+        'description': description,
+        'requester_id': random.choice(id_users),
+        'priority': random.choice(priority),
+        'status': random.choice(status),
+        'type': random.choice(type_),
+        'assignee_id': random.choice(id_users),
+        'via':{
+            'channel': random.choice(via)
+        }
+    })
+
+    data = {'tickets': result}
     print(result)
-    return result
+    return data

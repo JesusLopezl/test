@@ -69,7 +69,7 @@ def test():
     result = []
     #db1.users.drop()
     #db2.interaction.drop()
-    result = req.test()
+    result = req.test(users)
     return jsonify(result)
 
 if __name__ == '__main__':

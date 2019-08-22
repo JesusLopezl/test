@@ -4,23 +4,26 @@ import conexion
 import json
 import dummy
 
-user = 'londozzz33@gmail.com'
-token = '7xVEmoeJBrhf6QPJ5QPTrR69se0taimGjWwxkW4q'
+user = 'jesus.lopez.l15003@gmail.com'
+token = 'V1X5S7RjKR3iG0pJ7QKpvOKOFNO5B6uB46frt48B'
 
-def test():
-    url1 = 'https://test15003.zendesk.com/api/v2/tickets.json?per_page=2'
-    while url1:
-        response = requests.get(url1, auth=(user+"/token", token))
-        data = response.json()
-        for article in data['tickets']:
-            print(article['status'])
-        print('---------------------------')
-        url1 = data['next_page']    
-    return data
+def test(users):
+    #url1 = 'https://test15003.zendesk.com/api/v2/tickets.json?per_page=2'
+    #while url1:
+    #    response = requests.get(url1, auth=(user+"/token", token))
+    #    data = response.json()
+    #    for article in data['tickets']:
+    #        print(article['status'])
+    #    print('---------------------------')
+    #    url1 = data['next_page']   
+
+    
+    
+    return 'hola'
 
 
 def importUsers(users):
-    url1 = 'https://test15003.zendesk.com/api/v2/users.json?per_page=5'
+    url1 = 'https://test15003v.zendesk.com/api/v2/users.json?per_page=5'
     while url1:
         response = requests.get(url1, auth=(user+"/token", token))
         if response.status_code != 200:
@@ -41,13 +44,12 @@ def importUsers(users):
 
 
 def createTickets(users,num):
-    url2 = 'https://test15003.zendesk.com/api/v2/tickets.json'
-    
-    for i in range(int(num)): 
-        data = dummy.generator(users,0)    
-        payload = json.dumps(data)
-        headers = {'content-type': 'application/json'}    
-        response = requests.post(url2, data=payload, auth=(user+"/token", token), headers=headers)
+    url2 = 'https://test15003v.zendesk.com/api/v2/tickets/create_many.json'
+     
+    data = dummy.generateTickets(users,num)    
+    payload = json.dumps(data)
+    headers = {'content-type': 'application/json'}    
+    response = requests.post(url2, data=payload, auth=(user+"/token", token), headers=headers)
 
     
     if response.status_code != 201:
@@ -59,7 +61,7 @@ def createTickets(users,num):
     return data
 
 def importInteractions(interactions):
-    url2 = 'https://test15003.zendesk.com/api/v2/tickets.json?per_page=5'
+    url2 = 'https://test15003v.zendesk.com/api/v2/tickets.json?per_page=5'
 
     while url2:
         response = requests.get(url2, auth=(user+"/token", token))
