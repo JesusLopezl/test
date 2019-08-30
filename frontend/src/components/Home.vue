@@ -60,13 +60,16 @@
       <input  type="text" v-model="num" placeholder="cantidad">
       <button v-on:click="createInteractions(num)">crear iteraciones</button> 
       <button v-on:click="importInteractions()">importar iteracciones</button>
-      <!-- <button v-on:click="createPDF()">generar PDF</button>-->
+     <button v-on:click="createPDF()">generar PDF</button>
     </div>
 
   </div>
 </template>
 
 <script>
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+   
 //import jsPDF from 'jspdf'
 //import 'jspdf-autotable'
 import axios from 'axios'
@@ -103,14 +106,14 @@ export default {
   },
 
   methods: {
-    /*
+    
     createPDF(){
       alert('created')
       var doc = new jsPDF();
-      doc.autoTable({html: '#my-table'});
+      doc.autoTable({html: '#my_table'});
       doc.save('table.pdf');
       alert('created')
-    },*/
+    },
 
     getInteraction(){
       const path = 'http://localhost:5000/v1/interactions'
